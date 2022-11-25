@@ -1,0 +1,115 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-height: 100vh;
+  background: #d3d3d3;
+  font-family: "Poppins", sans-serif;
+  padding: clamp(20px, 5vw, 50px) 20px 20px;
+}
+
+.logo {
+  width: clamp(100px, 25vw, 250px);
+  display: block;
+  margin: 50px auto 0;
+}
+
+h1 {
+  font-size: clamp (20px, 5vw, 50px);
+  color: #463f3a;
+  text-align: center;
+  margin: 20px 0 10px;
+  font-weight: 300;
+}
+
+h1 span {
+  font-weight: 800;
+}
+
+form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin: 1em auto;
+  font-size: 16px;
+  padding: 1em;
+  border: none;
+  border-radius: 0.5em;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.error {
+  text-align: center;
+  color: #da1e37;
+  max-width: 600px;
+  margin: 3em auto;
+}
+
+.result {
+  font-size: 18px;
+  padding: 1em;
+  max-width: 800px;
+  margin: 3em auto;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader span {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #463f3a;
+  margin: 0 3px;
+  animation: load 0.5s infinite ease-out alternate;
+}
+
+.loader span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes load {
+  to {
+    transform: translateY(10px);
+  }
+}
+
+.result-item {
+  margin-bottom: 20px;
+}
+.result-title a {
+  text-decoration: none;
+  color: #463f3a;
+  font-size: 22px;
+  overflow-wrap: break-word;
+}
+.result-link a {
+  display: block;
+  text-decoration: none;
+  overflow-wrap: break-word;
+  font-size: 10px;
+  padding: 0.8em 0;
+  color: green;
+}
+.result-snippet {
+  font-size: 16px;
+  display: block;
+  text-decoration: none;
+  overflow-wrap: break-word;
+  color: #463f3a;
+}
