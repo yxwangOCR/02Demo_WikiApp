@@ -2,8 +2,9 @@
 
 const form = document.querySelector("form");
 const input = document.querySelector("input");
-const error = document.querySelector(".error");
+const errorMsg = document.querySelector(".error");
 const displayResult = document.querySelector(".result");
+const loader = document.querySelector(".loader");
 
 form.addEventListener("submit", handleSubmit);
 
@@ -13,27 +14,33 @@ function handleSubmit(e) {
   const searchInput = input.value.trim();
 
   if (searchInput === "") {
-    error.innerHTML = "Veuillz entrer un terme de recherche 🥺 ";
+    errorMsg.innerHTML = "Veuillz entrer un terme de recherche 🥺 ";
+    displayResult.textContent = "";
     return;
   } else {
-    error.textContent = "";
+    errorMsg.textContent = "";
+    loader.style.display = "flex";
+    displayResult.textContent = "";
     wikiApiCall(searchInput);
   }
 }
 
 async function wikiApiCall(searchInput) {
-  const response = await fetch(
-    `https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&origin=*&srlimit=20&srsearch=${searchInput}`
-  );
-  console.log(response);
-  const data = await response.json();
-  console.log(data);
-  createCard(data.query.search);
+  try {
+    const response = await fetch(
+      `https://en.wikipedia.org/w/api.php?action=query&list=search&format=json&origin=*&srlimit=20&srsearch=${searchInput}`
+    );
+    const data = await response.json();
+    createCard(data.query.search);
+  } catch (error) {
+    errorMsg.textContent = "Wopsy, une erreur est survenue 😥";
+    loader.style.display = "none";
+  }
 }
 
 function createCard(data) {
   if (!data.length) {
-    error.textContent = "Wopsy, aucun résultat trouvé 😥";
+    errorMsg.textContent = "Wopsy, aucun résultat trouvé 😥";
     return;
   }
   data.forEach((result) => {
@@ -51,4 +58,5 @@ function createCard(data) {
           `;
     displayResult.appendChild(card);
   });
+  loader.style.display = "none";
 }
